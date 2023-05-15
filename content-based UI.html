@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Restaurant Recommender System</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f2f2f2;
+      }
+
+      h1 {
+        text-align: center;
+        color: #333;
+      }
+
+      form {
+        margin: 0 auto;
+        max-width: 500px;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      }
+
+      label {
+        display: block;
+        margin-bottom: 5px;
+        color: #8f5d5d;
+      }
+
+      input[type="text"], input[type="number"] {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #784747;
+        border-radius: 3px;
+        box-sizing: border-box;
+        margin-bottom: 10px;
+        font-size: 16px;
+      }
+
+      input[type="submit"] {
+        background-color: #4CAF50;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 3px;
+        font-size: 16px;
+        cursor: pointer;
+      }
+
+      input[type="submit"]:hover {
+        background-color: #3e8e41;
+      }
+
+      input[type="submit"]:active {
+        background-color: #297b36;
+      }
+
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 20px;
+      }
+
+      .form-group label {
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+
+      .form-group select {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        font-size: 16px;
+      }
+
+      .form-group select option {
+        font-size: 16px;
+      }
+
+      .form-group select[multiple] {
+        height: auto;
+      }
+
+      .form-group select[multiple] option {
+        padding: 10px;
+        border-radius: 3px;
+      }
+
+      #recs {
+        margin-top: 30px;
+      }
+
+      #recs li {
+        margin-bottom: 10px;
+      }
+
+      #recs li span {
+        font-weight: bold;
+        color: #333;
+      }
+
+      #recs li small {
+        color: #666;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Restaurant Recommender System</h1>
+    <form method="POST" action="{{ url_for('recommend') }}">
+      <div class="form-group">
+        <label for="user-id">User ID:</label>
+        <input type="text" id="user-id" name="user-id" required>
+      </div>
+      <div class="form-group">
+        <label for="num-recs">Number of recommendations:</label>
+        <input type="number" id="num-recs" name="num-recs" required>
+      </div>
+      <div class="form-group">
+        <label for="cuisine">Preferred Cuisine:</div>
+            <div class="form-group">
+              <label for="location">Preferred Location:</label>
+              <select id="location" name="location" multiple>
+                <option value="Brooklyn">Brooklyn</option>
+                <option value="Queens">Queens</option>
+                <option value="Manhattan">Manhattan</option>
+                <option value="Bronx">Bronx</option>
+                <option value="Staten Island">Staten Island</option>
+              </select>
+            </div>
+            <input type="submit" value="Recommend">
+          </form>
+      
+          {% if recommendations %}
+            <h2>Recommended Restaurants</h2>
+            <ul id="recs">
+              {% for r in recommendations %}
+                <li><span>{{ r.name }}</span> <small>({{ r.cuisine }}, {{ r.location }})</small></li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        </body>
+      </html>
+      
